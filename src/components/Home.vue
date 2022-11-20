@@ -21,8 +21,9 @@ const fill = ref(true)
 
       <el-main width="100%" height="fix-content">
         <el-row>
-          <el-col :span="12"><GPUCard/></el-col>
-          <el-col :span="12"><GPUCard/></el-col>
+          <el-col :span="12" v-for="index in 2" :key="index">
+            <GPUCard :index="index" />
+          </el-col>  
         </el-row>
       </el-main>
 

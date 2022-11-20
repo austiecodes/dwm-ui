@@ -8,13 +8,17 @@ const colors = [
     { color: '#6f7ad3', percentage: 20 },
 ]
 
+defineProps<{
+    index:Number
+}>()
+
 </script>
 
 <template>
     <el-card class="box-card">
         <template #header>
             <div class="card-header">
-                <span>GPU card</span>
+                <span>GPU {{index}}</span>
             </div>
         </template>
         <el-row align="middle">
