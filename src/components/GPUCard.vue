@@ -51,6 +51,10 @@ const colors = [
 </template>
 
 <style>
+.box-card {
+    width: 80%;
+    margin: auto;
+}
 .card-header {
     display: flex;
     justify-content: space-between;
@@ -65,7 +69,5 @@ const colors = [
     margin-bottom: 18px;
 }
 
-.box-card {
-    width: 480px;
-}
+
 </style>

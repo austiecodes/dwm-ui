@@ -2,6 +2,11 @@
 import Navigation from './Navigation.vue';
 import HeaderBar from './HeaderBar.vue';
 import GPUCard from './GPUCard.vue'
+import Apply from './Apply.vue';
+
+import { ref } from 'vue';
+
+const fill = ref(true)
 </script>
 
 <template>
@@ -14,12 +19,19 @@ import GPUCard from './GPUCard.vue'
 
     <el-container>
 
-      <el-main height=100%>
-        <el-space wrap>
-          <div v-for="_ in 3"> <GPUCard/> </div>
-        </el-space>
+      <el-main width="100%" height="fix-content">
+        <el-row>
+          <el-col :span="12"><GPUCard/></el-col>
+          <el-col :span="12"><GPUCard/></el-col>
+        </el-row>
       </el-main>
+
+      <el-footer style="text-align: center; font-size: 12px">
+        <Apply />
+      </el-footer>
+
     </el-container>
+
 
   </el-container>
 </template>
