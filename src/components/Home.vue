@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import Navigation from './Navigation.vue';
 import HeaderBar from './HeaderBar.vue';
 import GPUCard from './GPUCard.vue'
-import Apply from './Apply.vue';
 
 import { ref } from 'vue';
+import ContainerCard from './ContainerCard.vue';
 
 const fill = ref(true)
 </script>
@@ -17,19 +16,27 @@ const fill = ref(true)
       <HeaderBar />
     </el-header>
 
-    <el-container>
+    <el-container direction="vertical">
 
       <el-main width="100%" height="fix-content">
-        <el-row>
-          <el-col :span="12" v-for="index in 2" :key="index">
+        <el-space fill wrap>
+          <el-row v-for="index in 2" :key="index" padding="10px">
+          <el-col :span="24">
             <GPUCard :index="index" />
-          </el-col>  
+          </el-col>
         </el-row>
+        </el-space>
+
       </el-main>
 
-      <el-footer style="text-align: center; font-size: 12px">
-        <Apply />
-      </el-footer>
+      <el-main width="100%" style="text-align: center; font-size: 12px">
+        <el-row>
+          <el-col :span="12" v-for="index in 2" :key="index">
+            <ContainerCard :index="index" />
+          </el-col>
+        </el-row>
+
+      </el-main>
 
     </el-container>
 
@@ -57,6 +64,14 @@ const fill = ref(true)
 }
 
 .layout-container .el-main {
+  padding: 20;
+}
+
+.layout-container .el-footer {
+  position: relative;
+  align-items: middle;
+  justify-items: center;
+  vertical-align: middle;
   padding: 20;
 }
 </style>
