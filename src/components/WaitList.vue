@@ -1,14 +1,7 @@
 <template>
 
-        <!-- <template #header>
-            <div>
-                Wait List
-            </div>
-        </template> -->
-
-        <el-table :data="tableData" stripe class="waitlist" >
-        <el-table-column prop="date" label="Time To Start" width="200px" />
-        <el-table-column prop="endDate" label="endDate" width="200px"/>
+    <el-table :data="tableData" stripe class="waitlist" >
+        <el-table-column prop="date" label="Time To Start" min-width="100px"/>
         <el-table-column prop="name" label="User"/>
         <el-table-column prop="assignment" label="Assignment"/>
         <el-table-column prop="duration" label="Duration"/>
@@ -21,7 +14,6 @@
 const tableData = [
     {
         date: '2016-05-01 17:33',
-        endDate: '2016-05-01 17:33',
         name: 'Tom',
         assignment: 'xxxx',
         duration: '24'

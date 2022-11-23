@@ -12,23 +12,53 @@
 
     <el-col :span="12" style="align-items: center;">
       <el-dropdown>
-        <el-icon style="margin-right: 8px; margin-top: center; font-size: 20px;">
+        <el-icon style="margin-right: 8px; margin-top: center; font-size: 35px;">
           <setting />
         </el-icon>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>Person Info</el-dropdown-item>
+            <el-dropdown-item @click="personalInfoVisible=true">Person Info</el-dropdown-item>
             <el-dropdown-item>Exit</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
     </el-col>
-
   </el-row>
+
+
+
+  <el-dialog v-model="personalInfoVisible" title="Personal Infomation" width="30%" destroy-on-close center>
+    <el-form :model="personalInfo" label-width="80px">
+      <el-form-item label="Name">
+        <el-input v-model="personalInfo.name"></el-input>
+      </el-form-item>
+      <el-form-item label="Email">
+        <el-input v-model="personalInfo.email"></el-input>
+      </el-form-item>
+    </el-form>
+
+    <template #footer>
+            <span class="dialog-footer">
+                <el-button @click="personalInfoVisible = false">Cancel</el-button>
+                <el-button type="primary" @click="personalInfoVisible = false">
+                    Confirm
+                </el-button>
+            </span>
+        </template>
+  </el-dialog>
 </template>
   
 <script setup lang="ts">
-import { Setting } from '@element-plus/icons-vue'
+import { Setting} from '@element-plus/icons-vue'
+import {ref} from 'vue'
+
+const personalInfoVisible = ref(false)
+
+const personalInfo = {
+  name: 'John',
+  email: '',
+
+}
 </script>
   
 <style scoped>

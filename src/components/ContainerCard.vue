@@ -1,16 +1,16 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 
-const colors = [
-    { color: '#f56c6c', percentage: 100 },
-    { color: '#e6a23c', percentage: 80 },
-    { color: '#5cb87a', percentage: 60 },
-    { color: '#1989fa', percentage: 40 },
-    { color: '#6f7ad3', percentage: 20 },
-]
+const active = ref(false)
+
+const status = "Start" 
+
+const containerNumber = 0
 
 defineProps<{
     index: Number
 }>()
+
 
 </script>
 
@@ -20,41 +20,62 @@ defineProps<{
             <div class="card-header">
                 <span>Container {{ index }}</span>
                 <div>
-                    <el-button type="primary">Start</el-button>
-                    <el-popconfirm confirm-button-text="Yes" cancel-button-text="No" 
-                        icon-color="red" title="Are you sure to delete this?">
+                    <el-button type="primary" @click="active = true">Start</el-button>
+                    <el-popconfirm confirm-button-text="Yes" cancel-button-text="No"
+                        title="确认删除">
                         <template #reference>
-                            <el-button>Delete</el-button>
+                            <el-button type="danger">Delete</el-button>
                         </template>
                     </el-popconfirm>
                 </div>
 
             </div>
         </template>
-        <el-row align="middle">
-            <el-col :span="12">
-                <p> Current Status</p>
-                <el-progress type="dashboard" percentage="80" :color="colors"></el-progress>
-            </el-col>
 
-            <el-col :span="12">
-                <el-row>
-                    <el-col :span="24">
-                        <span>Current Status: Active</span>
-                    </el-col>
-                    <el-col :span="24">
-                        <el-row>
-                            <el-col :span="12">
-                                <span>GPU ID</span>
-                            </el-col>
-                            <el-col :span="12">
-                                <span>GPU ID</span>
-                            </el-col>
-                        </el-row>
-                    </el-col>
-                </el-row>
-            </el-col>
-        </el-row>
+        <div>
+            <el-descriptions class="margin-top" title="" :column="2" border>
+                <el-descriptions-item>
+                    <template #label>
+                        <div class="cell-item">
+                            镜像
+                        </div>
+                    </template>
+                    kooriookami
+                </el-descriptions-item>
+                <el-descriptions-item>
+                    <template #label>
+                        <div class="cell-item">
+                            状态
+                        </div>
+                    </template>
+                    Inactive
+                </el-descriptions-item>
+                <el-descriptions-item>
+                    <template #label>
+                        <div class="cell-item">
+                            端口
+                        </div>
+                    </template>
+                    22->10009|8888->10010
+                </el-descriptions-item>
+                <el-descriptions-item>
+                    <template #label>
+                        <div class="cell-item">
+                            SSH
+                        </div>
+                    </template>
+                    ssh -p 10009 DM18@192.168.100.195
+                </el-descriptions-item>
+                <el-descriptions-item>
+                    <template #label>
+                        <div class="cell-item">
+                            Jupyter
+                        </div>
+                    </template>
+                    <el-link>http://192.168.100.195:10010</el-link>
+                </el-descriptions-item>
+            </el-descriptions>
+        </div>
     </el-card>
 </template>
 
