@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+import { Delete, SwitchButton, Warning } from '@element-plus/icons-vue';
+
 const active = ref(false)
-
-const status = "Start" 
-
-const containerNumber = 0
 
 defineProps<{
     index: Number
+    name: String
+    image?: String
+    command?: String
+    port?: String
 }>()
 
 
@@ -18,13 +20,14 @@ defineProps<{
     <el-card class="box-card">
         <template #header>
             <div class="card-header">
-                <span>Container {{ index }}</span>
+                <span>{{name}}</span>
                 <div>
-                    <el-button type="primary" @click="active = true">Start</el-button>
+                    <el-button v-if="active" type="warning" @click="active = !active" :icon="Warning">Stop</el-button>
+                    <el-button v-else type="primary" @click="active = !active" :icon="SwitchButton">Start</el-button>
                     <el-popconfirm confirm-button-text="Yes" cancel-button-text="No"
                         title="确认删除">
                         <template #reference>
-                            <el-button type="danger">Delete</el-button>
+                            <el-button v-if="!active" type="danger" :icon="Delete">Delete</el-button>
                         </template>
                     </el-popconfirm>
                 </div>
@@ -42,13 +45,14 @@ defineProps<{
                     </template>
                     kooriookami
                 </el-descriptions-item>
-                <el-descriptions-item>
+                <el-descriptions-item >
                     <template #label>
                         <div class="cell-item">
                             状态
                         </div>
                     </template>
-                    Inactive
+                    <div v-if="active">Active</div>
+                    <div v-else>Stopped</div>
                 </el-descriptions-item>
                 <el-descriptions-item>
                     <template #label>

@@ -3,6 +3,7 @@
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import Home from './components/Home.vue';
 
+
 </script>
 
 <template>
@@ -13,6 +14,5 @@ import Home from './components/Home.vue';
 .home {
   width: 100%;
   height: 100%;
-  min-width: 1000px;
 }
 </style>

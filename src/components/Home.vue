@@ -5,35 +5,17 @@ import { ElLoading } from 'element-plus';
 
 import HeaderBar from './HeaderBar.vue';
 import GPUCard from './GPUCard.vue';
+import Containers from './Containers.vue';
 
-
-var createContainerVisible = ref(false)
-
-const containerNumber = 0
-
-const containerInfo = reactive({
-  name: '',
-  containers: '',
-  duration: '',
-  command: '',
-  port: '',
-})
-
-
-
-const fullscreenLoading = ref(false)
-const openFullScreen = (createContainerVisible: Boolean) => {
-  fullscreenLoading.value = true
-  setTimeout(() => {
-    fullscreenLoading.value = false
-  }, 2000)
-
-  createContainerVisible = true
-}
+const size=ref(20)
 
 </script>
 
+
+
+
 <template>
+
 
   <el-container class="layout-container">
 
@@ -43,8 +25,8 @@ const openFullScreen = (createContainerVisible: Boolean) => {
 
     <el-container direction="vertical">
 
-      <el-main width="100%" height="fix-content">
-        <el-space wrap>
+      <el-main width="100%" height="fix-content" justify="center">
+        <el-space wrap :size="size">
           <div v-for="i in 3" :key="i">
             <GPUCard :index="i" />
           </div>
@@ -54,51 +36,17 @@ const openFullScreen = (createContainerVisible: Boolean) => {
 
       <el-divider></el-divider>
 
-      <el-main width="100%" style="text-align: center; font-size: 12px">
-        <h1>My Containers</h1>
-        <div v-if="containerNumber == 0">
-          <el-empty description="No Containers">
-            <el-button type="primary" @click="createContainerVisible = true">Create A Container</el-button>
-          </el-empty>
-        </div>
-        <!-- <el-space wrap>
-          <div v-for="i in 2" :key="i">
-            <ContainerCard :index="i" />
-          </div>
-        </el-space> -->
+      <el-main width="100%" style="text-align: center; font-size: 12px" justify="center">
+        <Containers :container-number="3"/>
       </el-main>
     </el-container>
 
-    <el-dialog v-model="createContainerVisible" title="Apply for GPU" width="35%" destroy-on-close center>
-      <el-form :model="containerInfo" label-width="100px">
-        <el-form-item label="Container Alias">
-          <el-input v-model="containerInfo.name" />
-        </el-form-item>
-        <el-form-item label="Image">
-          <el-select v-model="containerInfo.containers" placeholder="please select image">
-            <el-option label="image 1" value="one" />
-            <el-option label="image 2" value="two" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="Port Mapping">
-          <el-input v-model="containerInfo.port" placeholder="如果填写多个端口请用 ｜ 隔开" />
-        </el-form-item>
-      </el-form>
 
-      <template #footer>
-            <span class="dialog-footer">
-                <el-button @click="createContainerVisible = false">Cancel</el-button>
-                <!-- <el-button type="primary" @click="createContainerVisible = false, openFullScreen"> -->
-                <el-button v-loading.fullscreen.lock="fullscreenLoading" type="primary" @click="openFullScreen(createContainerVisible)">
-                    Confirm
-                </el-button>
-            </span>
-        </template>
-    </el-dialog>
   </el-container>
 </template>
   
   
+
 <style scoped>
 .layout-container {
   height: 100vh;

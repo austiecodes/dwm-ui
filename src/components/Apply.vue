@@ -10,7 +10,7 @@
                     <el-input v-model="form.name" />
                 </el-form-item>
                 <el-form-item label="Container">
-                    <el-select v-model="form.containers" placeholder="please select your zone">
+                    <el-select v-model="form.containers" placeholder="Select your container">
                         <el-option label="container one" value="one" />
                         <el-option label="container two" value="two" />
                     </el-select>

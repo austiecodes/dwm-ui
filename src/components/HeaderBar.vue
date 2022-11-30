@@ -30,10 +30,10 @@
   <el-dialog v-model="personalInfoVisible" title="Personal Infomation" width="30%" destroy-on-close center>
     <el-form :model="personalInfo" label-width="80px">
       <el-form-item label="Name">
-        <el-input v-model="personalInfo.name"></el-input>
+        <el-input v-model="personalInfo.name" clearable></el-input>
       </el-form-item>
       <el-form-item label="Email">
-        <el-input v-model="personalInfo.email"></el-input>
+        <el-input v-model="personalInfo.email" clearable></el-input>
       </el-form-item>
     </el-form>
 
@@ -50,15 +50,14 @@
   
 <script setup lang="ts">
 import { Setting} from '@element-plus/icons-vue'
-import {ref} from 'vue'
+import {ref, reactive} from 'vue'
 
 const personalInfoVisible = ref(false)
 
-const personalInfo = {
-  name: 'John',
+const personalInfo = reactive({
+  name:'',
   email: '',
-
-}
+})
 </script>
   
 <style scoped>

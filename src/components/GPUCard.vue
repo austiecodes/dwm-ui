@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ElDivider } from 'element-plus';
-import { h, ref } from 'vue'
 import Apply from './Apply.vue';
 import WaitList from './WaitList.vue';
 
@@ -16,9 +15,6 @@ defineProps<{
     index: Number
 }>()
 
-
-const spacer = h(ElDivider, { direction: 'vertical' })
-
 </script>
 
 <template>
@@ -32,33 +28,7 @@ const spacer = h(ElDivider, { direction: 'vertical' })
             </div>
         </template>
 
-        <!-- 
-        <el-space wrap :size="14">
-            <el-progress type="dashboard" :percentage="80" :color="gpuColors">
-                <template #default="{ percentage }">
-                    <span class="percentage-value">Memory: {{ percentage }}%</span>
-                </template>
-            </el-progress>
-
-            <el-progress type="dashboard" :percentage="50" :color="gpuColors">
-                <template #default="{ percentage }">
-                    <span class="percentage-value">Usage: {{ percentage }}%</span>
-                </template>
-            </el-progress>
-
-            <el-progress type="dashboard" :percentage="80">
-                <template #default="{ percentage }">
-                    <span class="percentage-value">Progress: {{ percentage }}%</span>
-                </template>
-            </el-progress>
-
-            <div>
-                    <p>用户：1235678</p>
-                    <p>剩余时间：7h31m</p>
-                    <el-button type="warning">End Early</el-button>
-            </div>
-        </el-space> -->
-        <el-row>
+        <el-row justify="center" :gutter="50">
             <el-col :span="8">
                 <el-progress type="dashboard" :percentage="80" :color="gpuColors">
                     <template #default="{ percentage }">
@@ -83,16 +53,10 @@ const spacer = h(ElDivider, { direction: 'vertical' })
                 </el-progress>
             </el-col>
 
-
-            <!-- <div>
-                    <p><strong>用户：</strong>1235678</p>
-                    <p><strong>活动：</strong>做实验 debug</p>
-                    <p><strong>剩余时间：</strong>7h31m</p>
-                    <el-button type="warning">Terminate Mission</el-button>
-                </div> -->
         </el-row>
-        <el-row>
-            <el-descriptions title="正在进行" direction="veritical" :column="3" border >
+        <el-divider>正在进行</el-divider>
+        <el-row justify="center">
+            <el-descriptions title="" direction="vertical" :column="3" border >
                 <template #extra></template>
                 <el-descriptions-item label="用户">meihuanyuyu</el-descriptions-item>
                 <el-descriptions-item label="活动">Experiment</el-descriptions-item>
@@ -100,9 +64,9 @@ const spacer = h(ElDivider, { direction: 'vertical' })
         </el-descriptions>
         </el-row>
 
-        <el-row>
+        <el-divider>等待列表</el-divider>
             <WaitList/>
-        </el-row>
+
     </el-card>
 
 </template>
