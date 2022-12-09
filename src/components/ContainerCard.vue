@@ -6,7 +6,7 @@ import { Delete, SwitchButton, Warning } from '@element-plus/icons-vue';
 const active = ref(false)
 
 defineProps<{
-    index: Number
+    index: Number,
     name: String
     image?: String
     command?: String
@@ -14,20 +14,30 @@ defineProps<{
 }>()
 
 
+const isContainerLoading = ref(false)
+
+const containerLoading = () => {
+    isContainerLoading.value = true
+    setTimeout(() => {
+        isContainerLoading.value = false
+    }, 2000)
+}
+
+
 </script>
 
 <template>
-    <el-card class="box-card">
+    <el-card class="box-card" v-loading="isContainerLoading">
         <template #header>
             <div class="card-header">
                 <span>{{name}}</span>
                 <div>
-                    <el-button v-if="active" type="warning" @click="active = !active" :icon="Warning">Stop</el-button>
-                    <el-button v-else type="primary" @click="active = !active" :icon="SwitchButton">Start</el-button>
+                    <el-button v-if="active" type="warning" @click="active = !active; containerLoading()" :icon="Warning">Stop</el-button>
+                    <el-button v-else type="primary" @click="active = !active;containerLoading()" :icon="SwitchButton">Start</el-button>
                     <el-popconfirm confirm-button-text="Yes" cancel-button-text="No"
                         title="确认删除">
                         <template #reference>
-                            <el-button v-if="!active" type="danger" :icon="Delete">Delete</el-button>
+                            <el-button v-if="!active" type="danger" :icon="Delete" @click="containerLoading()">Delete</el-button>
                         </template>
                     </el-popconfirm>
                 </div>
@@ -43,7 +53,7 @@ defineProps<{
                             镜像
                         </div>
                     </template>
-                    kooriookami
+                    {{image}}
                 </el-descriptions-item>
                 <el-descriptions-item >
                     <template #label>
@@ -60,7 +70,7 @@ defineProps<{
                             端口
                         </div>
                     </template>
-                    22->10009|8888->10010
+                    {{port}}
                 </el-descriptions-item>
                 <el-descriptions-item>
                     <template #label>

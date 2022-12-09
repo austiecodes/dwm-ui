@@ -5,19 +5,22 @@ import ContainerCard from './ContainerCard.vue';
 
 
 defineProps<{
-    containerNumber: number
+    containerNumber: Number
 }>()
 
-const containers = [ 
-    {
+defineEmits<{
+    (deleteContainer: number): void
+}>()
+
+const containers = reactive([
+    {   
         index: 1,
-        name: 'axiba2333',
+        name: 'Container 1',
         image: 'kooriookami',
         command: 'npm run serve',
-        port: '8080:8080'
+        port: '8080',
     },
-
-]
+])
 
 const createContainerVisible = ref(false)
 
@@ -41,20 +44,18 @@ const createContainer = () => {
     containers.push({
         index: containers.length + 1,
         name: containerApply.name,
-        image: '222333',
+        image: containerApply.image,
         command: containerApply.command,
         port: containerApply.port
     })
+
     createContainerVisible.value = false
 
     containerApply.name = ''
     containerApply.image = ''
     containerApply.command = ''
     containerApply.port = ''
-
 }
-
-
 
 </script>
 
@@ -64,14 +65,12 @@ const createContainer = () => {
 
     <h1>My Containers</h1>
     <div v-if="containerNumber == 0">
-        <el-empty description="No Containers">
-
-        </el-empty>
+        <el-empty description="No Containers"/>
     </div>
     <div v-else>
         <el-space wrap>
             <div v-for="container in containers">
-                <ContainerCard :index="container.index" :name="container.name"/>
+                <ContainerCard :index="container.index" :name="container.name" :image="container.image" :port="container.port"/>
             </div>
         </el-space>
     </div>
@@ -80,8 +79,6 @@ const createContainer = () => {
         <el-button margin-top="8px" type="primary" @click="createContainerVisible = true" :icon="Plus">Create A Container</el-button>
     </el-row>
     
-
-
     <el-dialog v-model="createContainerVisible" title="Apply for GPU" width="35%" destroy-on-close center>
         <el-form :model="containerApply" label-width="100px">
             <el-form-item label="Container Alias">
